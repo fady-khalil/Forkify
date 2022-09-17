@@ -80,8 +80,11 @@ const controlServings = function (newServings) {
 
 const controlAddBokkmark = function () {
   // 1)
-  // if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
-  // else model.dele
+  if (!model.state.recipe.bookmarked) model.addBookmark(model.state.recipe);
+  else if (model.state.recipe.bookmarked)
+    model.deletBookmark(model.state.recipe.id);
+
+  recipeView.update(model.state.recipe);
 };
 
 const init = function () {
