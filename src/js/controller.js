@@ -5,6 +5,7 @@ import searchView from './views/searchView.js';
 import resultView from './views/resultView.js';
 import paginationView from './views/paginationView.js';
 import bookmarksView from './views/bookmarksView.js';
+import addRecipeView from './views/addRecipeView.js';
 //
 import 'core-js/stable';
 import 'regenerator-runtime/runtime';
@@ -92,17 +93,41 @@ const controlAddBokkmark = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
-const controleBookmarks = function () {
+const controlBookmarks = function () {
   bookmarksView.render(model.state.bookmarks);
 };
 
+const controlAddRecipe = async function (newRecipe) {
+  try {
+    // show loading spinner
+    addRecipeView.renderSpinner();
+
+    // Upload the new Recipe data
+    await model.uploadRecipe(newRecipe);
+
+    // Render recipe
+    recipeView.render(model.state.recipe);
+
+    // success message
+    addRecipeView.renderMessage();
+
+    // Close form
+    setTimeout(() => {
+      addRecipeView.toggleWindow();
+    }, 2500);
+  } catch (err) {
+    addRecipeView.renderError(err.message);
+  }
+};
+
 const init = function () {
-  bookmarksView.addHandlerRender(controleBookmarks);
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHnadlerRender(controlRecipes);
   recipeView.addHandlerUpadateServings(controlServings);
   recipeView.addHandlerBookmark(controlAddBokkmark);
 
   searchView.addHandlerSearch(controlSearchResult);
   paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 init();
