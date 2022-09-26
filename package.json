@@ -1,11 +1,14 @@
 {
   "name": "forikify",
   "version": "1.0.0",
+  "default": "index.html",
+  "description": "Search recipe application",
+  "browserslist": "> 0.5%, last 2 versions, not dead",
   "scripts": {
     "start": "parcel index.html",
-    "build": "build parcel index.html"
+    "build": "parcel build index.html --dist-dir ./dist"
   },
-  "author": "",
+  "author": "Fady Khalil",
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
@@ -15,6 +18,5 @@
     "core-js": "^3.25.0",
     "fracty": "^1.0.11",
     "regenerator-runtime": "^0.13.9"
-  },
-  "description": ""
+  }
 }
